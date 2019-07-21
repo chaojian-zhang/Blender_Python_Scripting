@@ -15,6 +15,7 @@ First we mention the very very basic stuff concerning how we can **use Python AP
     * Use Text Editor space type/editor, use this it will only print errors in Terminal, will not print anything e.g. using list() inside blender python console
 2. Data Creation: Notice we cannot create new instances outside the main Blender database using class types directly, must use collections' methods, and we can create variables to hold the references to the objects.
 3. How to debug?
+    * For simple **print outputs**, we can toggle `Window - Toggle System Console`
 4. How is Python Integrated Inside Blender?  
 	* Refer to this: https://docs.python.org/3.1/extending/embedding.html
 
@@ -53,6 +54,25 @@ First we mention the very very basic stuff concerning how we can **use Python AP
 3. Mathutils: ...
 4. ID Types: `bpy.types.bpy_struct` - `bpy.types.ID` - `bpy.types.Object`
 
+# Scene Structure
+
+To script with Python in Blender is to **manipulate objects** within the **scene(s)**, or the Blender file.
+
+The scene most contains containers of following data types: **objects**, **meshes**, **materials**, **textures**, **scenes**, **screens**, **sounds**, **scripts**, *etc.*. All those data are ultimately defined inside `bpy.data`.
+
+Objects in the scene (collections) are **linked/unlinked** together.
+
+## Basic Concepts
+
+Below concepts are mostly relevant to (current) **context**:
+
+1. Object: At any instance, only one object is active and there can be more than one selected object.
+2. Context: All objects exist in a context and there can be various modes under which they are operated upon.
+3. Mode: The editing mode as in (active) 3D view
+4. Blend-file: All objects are data in the blend-file.
+5. Operators: operators are functions that create and modify scene objects.
+6. Active_object: when multiple objects are selected only the last selected one is the active object.
+
 # Modules
 
 Blender Python API development is broadly divided into below modules for specific tasks:
@@ -65,7 +85,7 @@ Blender Python API development is broadly divided into below modules for specifi
 
 1. `bpy.data` - Everything in currently loaded `.blend` file: 
     * "`bpy.data` is an instance of the `bpy.types.BlendData` class" as stated [here](http://www.blender.org/api/blender_python_api_2_74_5/info_api_reference.html#simple-data-access).
-    * `bpy.context` – Access bpy.data according to current context (i.e. current **selection of objects**, AND current **active viewport**), which effectively limits data accessing according to context, and this is **Read Only**
+    * `bpy.context` – Access `bpy.data` according to current **context** (i.e. current **selection of objects** and current **active viewport**), which effectively limits data accessing according to context, and this is **Read Only**
     * `bpy.context.object` is the current active object
 
 ## Application Oriented References:
@@ -86,3 +106,6 @@ For definition of terminology (for **Blender editor** and environment in general
 * Help ‣ Operator Cheat Sheet
 
 # Official API Documentation Pointers
+
+1. [Python Examples](https://docs.blender.org/manual/en/latest/editors/python_console.html)
+2. [Blender Scene and Object API changes from 2.7x to 2.8](https://wiki.blender.org/wiki/Reference/Release_Notes/2.80/Python_API/Scene_and_Object_API)
